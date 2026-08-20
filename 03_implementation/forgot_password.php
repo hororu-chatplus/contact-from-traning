@@ -33,8 +33,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $pdo->prepare('UPDATE admin_users SET password_reset_token = :token, password_reset_expires_at = :expires_at WHERE id = :id')
                 ->execute(['token' => $token, 'expires_at' => $expires_at, 'id' => $admin['id']]);
 
-            $scheme = !empty($_SERVER['HTTPS']) ? 'https' : 'http';
-            $reset_link = $scheme . '://' . $_SERVER['HTTP_HOST'] . '/reset_password.php?token=' . $token;
+            // リバースプロキシ配下（GitHub Codespaces等）でも正しい外部URLを組み立てる
+            $scheme = is_secure_request() ? 'https' : 'http';
+            $reset_link = $scheme . '://' . current_host() . '/reset_password.php?token=' . $token;
 
             $body = <<<TEXT
 {$admin['login_id']} 様

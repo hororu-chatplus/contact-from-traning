@@ -18,6 +18,32 @@ set_exception_handler(function (Throwable $e): void {
 });
 
 /**
+ * リバースプロキシ配下（GitHub Codespaces等）でアクセスされた場合でも、実際の通信が
+ * HTTPSかどうかを正しく判定する。プロキシがTLSを終端し、内部的にはPHPへプレーンHTTPで
+ * 転送する構成では$_SERVER['HTTPS']が空になるため、プロキシが付与するX-Forwarded-Protoを
+ * 優先的に見る。
+ *
+ * 注意: X-Forwarded-Protoは本来クライアントが自由に偽装できるヘッダーであり、信頼できる
+ * プロキシを経由せず直接インターネットに公開する構成では、この値を信用してはならない。
+ * ここで信頼して良いのは「アプリの手前に、このヘッダーを常に上書きする信頼できるプロキシが
+ * 必ず存在する」構成に限る（Codespacesはこれに該当する）。本番のホスティング環境がリバース
+ * プロキシ構成かどうかは、ホスティング詳細確定時に要件定義書15章とあわせて再確認すること。
+ */
+function is_secure_request(): bool
+{
+    if (!empty($_SERVER['HTTP_X_FORWARDED_PROTO'])) {
+        return strtolower($_SERVER['HTTP_X_FORWARDED_PROTO']) === 'https';
+    }
+    return !empty($_SERVER['HTTPS']);
+}
+
+/** リバースプロキシ配下でも、外部から見えている実際のホスト名を返す（上記と同じ信頼前提） */
+function current_host(): string
+{
+    return $_SERVER['HTTP_X_FORWARDED_HOST'] ?? $_SERVER['HTTP_HOST'] ?? 'localhost';
+}
+
+/**
  * セッション開始と共通セキュリティヘッダの出力。全ページの先頭で呼び出す。
  */
 function bootstrap_session(): void
@@ -28,7 +54,7 @@ function bootstrap_session(): void
             'path' => '/',
             'httponly' => true,           // 要件 8.3
             'samesite' => 'Lax',
-            'secure' => !empty($_SERVER['HTTPS']), // HTTPS時のみSecure属性を付与（要件 8.3）
+            'secure' => is_secure_request(), // HTTPS時のみSecure属性を付与（要件 8.3）
         ]);
         session_name('CFSESSID');
         session_start();
