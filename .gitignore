@@ -1,0 +1,6 @@
+# 秘密情報（DBパスワード・SMTP認証情報など）を含むため除外
+03_implementation/.env
+
+# 実行時に生成されるログ（研修用のテスト送信内容・個人メールアドレスを含み得る）
+03_implementation/storage/*.log
+03_implementation/storage/mail_log.txt

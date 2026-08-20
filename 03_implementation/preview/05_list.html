@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>お問い合わせ一覧（プレビュー） - ChatPlus</title>
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<header class="admin-header">
+  <h1>お問い合わせ一覧</h1>
+  <nav>
+    <a href="index.html">プレビュー一覧</a>
+    <a href="08_accounts.html">管理者アカウント管理</a>
+    <a href="04_login.html">ログアウト</a>
+  </nav>
+</header>
+<main class="admin-main">
+<p class="note">[プレビュー：サンプルデータ表示中] S-05 一覧画面</p>
+
+<form onsubmit="return false;" class="filter-bar">
+  <select name="status">
+    <option>すべて</option>
+    <option>未対応</option>
+    <option>対応済</option>
+  </select>
+  <input type="text" name="keyword" placeholder="会社名・お名前・メールアドレスで検索">
+  <button type="submit" class="btn btn-secondary">検索</button>
+</form>
+
+<table class="list-table">
+<thead>
+<tr><th>会社名</th><th>お名前</th><th>メールアドレス</th><th>種別</th><th>内容</th><th>登録日時</th><th>ステータス</th></tr>
+</thead>
+<tbody>
+<tr onclick="location.href='06_detail.html'">
+  <td>〇〇株式会社</td><td>山田 太郎</td><td>yamada@example.co.jp</td><td>見積もりについて</td>
+  <td>ChatPlusの導入を検討して…</td><td>2026-08-01 10:00</td><td><span class="badge badge-open">未対応</span></td>
+</tr>
+<tr onclick="location.href='06_detail.html'">
+  <td>△△商事株式会社</td><td>佐藤 花子</td><td>sato@example-corp.jp</td><td>サービス内容について</td>
+  <td>FAQPlusの機能について教…</td><td>2026-07-30 15:20</td><td><span class="badge badge-done">対応済</span></td>
+</tr>
+<tr onclick="location.href='06_detail.html'">
+  <td>株式会社□□</td><td>鈴木 一郎</td><td>suzuki@example-inc.co.jp</td><td>その他</td>
+  <td>資料請求をお願いします…</td><td>2026-07-28 09:45</td><td><span class="badge badge-open">未対応</span></td>
+</tr>
+</tbody>
+</table>
+</main>
+</body>
+</html>

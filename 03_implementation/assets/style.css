@@ -1,0 +1,506 @@
+/* 配色はChatPlus本体の既存お問い合わせページ（https://chatplus.jp/cp_contact/）に合わせている（2026-08-13のヒアリングで確定） */
+:root {
+  --color-border: #d0d5dd;
+  --color-accent: #1fbbe8;
+  --color-accent-dark: #0284c7;
+  --color-navy: #14213d;
+  --color-required-bg: #e53935;
+  --color-error: #dc2626;
+  --color-success: #16a34a;
+  --color-danger: #dc2626;
+  --color-text: #1f2937;
+  --color-bg: #ffffff;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: "Hiragino Kaku Gothic ProN", "Meiryo", sans-serif;
+  background: var(--color-bg);
+  color: var(--color-text);
+  line-height: 1.6;
+}
+
+h1 { font-size: 1.6rem; font-weight: 800; color: var(--color-navy); margin: 0 0 1.25rem; }
+h2 { font-size: 1.1rem; margin: 2rem 0 0.75rem; }
+
+.brand-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.brand-logo .brand-name {
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: var(--color-navy);
+}
+.brand-logo .brand-name .accent { color: var(--color-accent); }
+
+/* 利用者向け画面（入力・確認・完了）の上部に置く、参考ページの共通ヘッダーを模した細いバー */
+.site-header {
+  background: #fff;
+  border-bottom: 1px solid var(--color-border);
+  padding: 1rem 1.5rem;
+}
+.site-header .brand-logo {
+  max-width: 880px;
+  margin: 0 auto;
+}
+
+/* 管理者ログイン・パスワード再設定など、単発の操作画面（囲みのある小さめカード） */
+.form-card {
+  max-width: 480px;
+  margin: 2rem auto;
+  padding: 1.5rem;
+  background: #fff;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+}
+
+/*
+ * 利用者向け画面（入力・確認・完了）。
+ * 参考ページ（https://chatplus.jp/cp_contact/）に合わせ、枠で囲んだ「カード」ではなく
+ * 白背景のページに直接配置する、幅広めのフラットなレイアウトにする（2026-08-13のヒアリングで確定）。
+ */
+.contact-page {
+  max-width: 880px;
+  margin: 0 auto;
+  padding: 2.5rem 1.5rem 4rem;
+}
+.contact-page h1 { font-size: 2.5rem; margin-top: 0.5rem; }
+.contact-page .step-indicator { justify-content: flex-start; font-size: 0.8rem; }
+.contact-page .field,
+.contact-page form,
+.contact-page .confirm-list { max-width: 560px; margin-left: auto; margin-right: auto; }
+
+/* プライバシーポリシー同意のチェックボックスだけは、フォーム列の中で中央寄せにする */
+.contact-page .field-checkbox {
+  justify-content: center;
+  text-align: center;
+}
+.contact-page .field-checkbox .error-message {
+  margin-left: 0;
+  text-align: center;
+}
+
+.complete-card {
+  text-align: center;
+}
+.note {
+  font-size: 0.8rem;
+  color: #6b7280;
+  display: block;
+  margin-bottom: 1rem;
+}
+
+.field { margin-bottom: 1.25rem; }
+.field label { display: block; font-weight: bold; margin-bottom: 0.35rem; }
+
+.required {
+  display: inline-block;
+  background: var(--color-required-bg);
+  color: #fff;
+  font-size: 0.7rem;
+  font-weight: bold;
+  padding: 0.1rem 0.5rem;
+  border-radius: 3px;
+  margin-left: 0.5rem;
+  vertical-align: middle;
+}
+
+.field-checkbox {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+.field-checkbox input[type="checkbox"] {
+  width: auto;
+  margin-top: 0.3rem;
+}
+.field-checkbox label {
+  display: inline;
+  font-weight: normal;
+  margin-bottom: 0;
+}
+.field-checkbox input.error + label {
+  color: var(--color-error);
+}
+.field-checkbox .error-message {
+  flex-basis: 100%;
+  margin: 0.35rem 0 0 1.6rem;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+input[type="password"],
+select,
+textarea {
+  width: 100%;
+  padding: 0.6rem;
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+textarea { resize: vertical; }
+
+.char-counter {
+  font-size: 0.8rem;
+  color: #6b7280;
+  margin: 0.3rem 0 0;
+  text-align: right;
+}
+
+.step-indicator {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1.5rem;
+  font-size: 0.85rem;
+  color: #9ca3af;
+}
+.step-indicator .active {
+  color: var(--color-accent);
+  font-weight: bold;
+}
+
+input.error, select.error, textarea.error {
+  border-color: var(--color-error);
+  background: #fef2f2;
+}
+
+.error-message {
+  color: var(--color-error);
+  font-size: 0.85rem;
+  margin: 0.35rem 0 0;
+}
+
+.success-message {
+  color: var(--color-success);
+  font-weight: bold;
+}
+
+.recaptcha-note p {
+  font-size: 0.8rem;
+  color: #6b7280;
+  border: 1px dashed var(--color-border);
+  padding: 0.75rem;
+  border-radius: 4px;
+}
+
+.btn {
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  border-radius: 6px;
+  border: none;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  text-align: center;
+}
+.btn-primary { background: var(--color-accent); color: #fff; }
+.btn-primary:hover { background: var(--color-accent-dark); }
+.btn-secondary { background: #fff; color: var(--color-text); border: 1px solid var(--color-border); }
+.btn-danger { background: #fff; color: var(--color-danger); border: 1px solid var(--color-danger); }
+.btn-danger:hover { background: #fef2f2; }
+.btn-block { display: block; width: 100%; }
+
+.button-row { display: flex; gap: 0.75rem; margin-top: 1.5rem; flex-wrap: wrap; }
+
+.forgot-password-link { text-align: center; font-size: 0.9rem; margin-top: 1rem; }
+
+.confirm-list { display: grid; grid-template-columns: 9em 1fr; gap: 0.5rem 1rem; }
+.confirm-list dt { font-weight: bold; color: #6b7280; }
+.confirm-list dd { margin: 0; }
+.pre-wrap { white-space: pre-wrap; }
+
+/* 管理者向け画面 */
+.admin-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  padding: 1rem 1.5rem;
+  background: #fff;
+  border-bottom: 1px solid var(--color-border);
+}
+.admin-header-left {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.admin-header-left h1 {
+  margin: 0;
+  padding-left: 1rem;
+  border-left: 1px solid var(--color-border);
+  font-size: 1.2rem;
+}
+.admin-header nav {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.admin-header nav > a {
+  color: var(--color-accent);
+  text-decoration: none;
+}
+.admin-header nav > a:hover { text-decoration: underline; }
+
+/* メニュー（三本線アイコン）は、標準のdetails/summary要素で開閉する（JS不要） */
+.menu { position: relative; }
+.menu-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.2rem;
+  height: 2.2rem;
+  cursor: pointer;
+  list-style: none;
+  font-size: 1.2rem;
+  line-height: 1;
+  border-radius: 6px;
+  color: var(--color-text);
+  user-select: none;
+}
+.menu-toggle::-webkit-details-marker { display: none; }
+.menu-toggle:hover, .menu[open] .menu-toggle { background: #f1f5f9; }
+
+.menu-dropdown {
+  position: absolute;
+  right: 0;
+  top: 100%;
+  margin-top: 0.4rem;
+  background: #fff;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.12);
+  padding: 0.4rem;
+  min-width: 220px;
+  white-space: nowrap;
+  z-index: 20;
+  display: flex;
+  flex-direction: column;
+}
+.menu-dropdown a,
+.menu-dropdown .logout-form .link-button {
+  display: block;
+  width: 100%;
+  padding: 0.55rem 0.75rem;
+  border-radius: 4px;
+  color: var(--color-text);
+  text-decoration: none;
+  text-align: left;
+  font-size: 0.95rem;
+}
+.menu-dropdown a:hover,
+.menu-dropdown .logout-form .link-button:hover {
+  background: #f1f5f9;
+  text-decoration: none;
+}
+.menu-dropdown .logout-form { margin: 0; }
+.link-button {
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  color: var(--color-accent);
+  text-decoration: none;
+  cursor: pointer;
+}
+.link-button:hover { text-decoration: underline; }
+
+.admin-main {
+  max-width: 960px;
+  margin: 1.5rem auto;
+  padding: 0 1rem;
+}
+
+/* お問い合わせ一覧（S-05）は列数が多いため、他の管理画面より横幅を広く取る
+   （要件 F-14、2026-08-14のヒアリングで追加） */
+.admin-main-wide {
+  max-width: 1280px;
+}
+
+.filter-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+}
+.filter-bar input[type="text"] { flex: 1; min-width: 200px; }
+.filter-bar label {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-weight: normal;
+  font-size: 0.9rem;
+  white-space: nowrap;
+}
+.filter-bar select { width: auto; }
+
+.list-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+  overflow-x: auto;
+  display: block;
+}
+.list-table th, .list-table td {
+  border-bottom: 1px solid var(--color-border);
+  padding: 0.6rem 0.75rem;
+  text-align: left;
+  white-space: nowrap;
+}
+.list-table tbody tr[onclick] { cursor: pointer; }
+.list-table tbody tr[onclick]:hover { background: #f1f5f9; }
+
+.badge {
+  display: inline-block;
+  padding: 0.2rem 0.6rem;
+  border-radius: 999px;
+  font-size: 0.8rem;
+}
+.badge-open { background: #fee2e2; color: #b91c1c; }
+.badge-done { background: #e5e7eb; color: #374151; }
+
+/* サービス項目の種類ごとの色分け（要件 F-14、2026-08-13のヒアリングで確定: ChatPlus=水色、FAQPlus=紺色、AI AgentPlus=濃い紫）*/
+.badge-service-chatplus { background: #1fbbe8; color: #ffffff; }
+.badge-service-faqplus { background: #1e3a8a; color: #ffffff; }
+.badge-service-aiagentplus { background: #5b21b6; color: #ffffff; }
+
+.inline-form {
+  background: #fff;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+.inline-form label { font-weight: bold; margin-right: 0.5rem; }
+
+.pagination {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+  margin: 1rem 0;
+}
+.pagination a {
+  padding: 0.4rem 0.75rem;
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+  color: var(--color-text);
+  text-decoration: none;
+  background: #fff;
+}
+.pagination a:hover { background: #f1f5f9; }
+.pagination-current {
+  padding: 0.4rem 0.75rem;
+  border-radius: 4px;
+  background: var(--color-accent);
+  color: #fff;
+  font-weight: bold;
+}
+
+.mail-log {
+  background: #111827;
+  color: #d1fae5;
+  padding: 1rem;
+  border-radius: 8px;
+  overflow-x: auto;
+  white-space: pre-wrap;
+  font-size: 0.85rem;
+}
+
+@media (max-width: 600px) {
+  .confirm-list { grid-template-columns: 1fr; }
+  .confirm-list dt { margin-top: 0.5rem; }
+}
+
+/* 運用マニュアル画面（admin/manual.php） */
+.manual-content {
+  max-width: 760px;
+  margin: 0 auto;
+}
+.manual-content h2 {
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: var(--color-navy);
+  border-bottom: 2px solid #e0f2fe;
+  padding-bottom: 0.5rem;
+  margin-top: 2.5rem;
+}
+.manual-content h3 {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--color-navy);
+  margin: 1.5rem 0 0.5rem;
+}
+
+.manual-toc {
+  background: #fff;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  padding: 1.1rem 1.4rem;
+  margin-bottom: 1rem;
+}
+.manual-toc p {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #6b7280;
+  margin: 0 0 0.6rem;
+}
+.manual-toc ol {
+  columns: 2;
+  column-gap: 1.5rem;
+  margin: 0;
+  padding-left: 1.2rem;
+}
+.manual-toc li { break-inside: avoid; margin-bottom: 0.3rem; }
+.manual-toc a { color: var(--color-text); text-decoration: none; }
+.manual-toc a:hover { color: var(--color-accent-dark); text-decoration: underline; }
+
+.manual-figure {
+  background: #fff;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  padding: 0.6rem;
+  margin: 1rem 0 1.5rem;
+}
+.manual-figure img { display: block; width: 100%; height: auto; border-radius: 4px; }
+.manual-figure figcaption {
+  text-align: center;
+  font-size: 0.85rem;
+  color: #6b7280;
+  padding: 0.5rem 0.25rem 0.1rem;
+}
+
+.manual-note, .manual-warn {
+  border-radius: 6px;
+  padding: 0.85rem 1.1rem;
+  margin: 1.1rem 0;
+  font-size: 0.95rem;
+}
+.manual-note { background: #f0f9ff; border-left: 3px solid var(--color-accent); }
+.manual-warn { background: #fef2f2; border-left: 3px solid var(--color-error); color: #991b1b; }
+.manual-note strong, .manual-warn strong { display: inline-block; margin-bottom: 0.15rem; }
+
+.manual-qa { margin-bottom: 1.1rem; }
+.manual-qa .q { font-weight: 700; color: var(--color-navy); margin-bottom: 0.2rem; }
+
+.manual-top-link { font-size: 0.85rem; text-align: right; }
+.manual-top-link a { color: #6b7280; text-decoration: none; }
+.manual-top-link a:hover { color: var(--color-accent-dark); }
+
+@media (max-width: 600px) {
+  .manual-toc ol { columns: 1; }
+}

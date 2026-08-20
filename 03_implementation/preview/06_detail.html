@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>お問い合わせ詳細（プレビュー） - ChatPlus</title>
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<header class="admin-header">
+  <h1>お問い合わせ詳細</h1>
+  <nav><a href="index.html">プレビュー一覧</a><a href="05_list.html">一覧へ戻る</a></nav>
+</header>
+<main class="admin-main">
+<p class="note">[プレビュー：サンプルデータ表示中] S-06 詳細画面</p>
+
+<dl class="confirm-list">
+  <dt>会社名</dt><dd>〇〇株式会社</dd>
+  <dt>電話番号</dt><dd>03-1234-5678</dd>
+  <dt>お名前</dt><dd>山田 太郎</dd>
+  <dt>メールアドレス</dt><dd>yamada@example.co.jp</dd>
+  <dt>サービス項目</dt><dd>ChatPlus</dd>
+  <dt>お問い合わせ種別</dt><dd>見積もりについて</dd>
+  <dt>お問い合わせ内容</dt><dd class="pre-wrap">ChatPlusの導入を検討しております。料金プランと導入までの流れについて教えてください。</dd>
+  <dt>登録日時</dt><dd>2026-08-01 10:00</dd>
+</dl>
+
+<form onsubmit="return false;" class="inline-form">
+  <label for="status">ステータス</label>
+  <select id="status" name="status">
+    <option>未対応</option>
+    <option>対応済</option>
+  </select>
+  <button type="submit" class="btn btn-secondary">保存</button>
+</form>
+
+<form onsubmit="return false;" class="inline-form">
+  <label for="memo">メモ（社内向け）</label>
+  <textarea id="memo" name="memo" rows="4"></textarea>
+  <button type="submit" class="btn btn-secondary">保存</button>
+</form>
+
+<div class="button-row">
+  <a class="btn btn-primary" href="07_reply.html">返信する</a>
+  <button type="button" class="btn btn-danger"
+          onclick="if(confirm('このお問い合わせを削除します。よろしいですか？')){ alert('プレビューのため実際の削除は行われません'); }">
+    削除する
+  </button>
+</div>
+</main>
+</body>
+</html>

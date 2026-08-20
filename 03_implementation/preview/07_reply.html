@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>返信メール作成（プレビュー） - ChatPlus</title>
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<header class="admin-header">
+  <h1>返信メール作成</h1>
+  <nav><a href="index.html">プレビュー一覧</a><a href="06_detail.html">詳細へ戻る</a></nav>
+</header>
+<main class="admin-main">
+<p class="note">[プレビュー] S-07 返信画面</p>
+
+<form onsubmit="return false;">
+  <div class="field">
+    <label>宛先</label>
+    <p>yamada@example.co.jp（変更不可）</p>
+  </div>
+  <div class="field">
+    <label for="subject">件名 <span class="required">*</span></label>
+    <input type="text" id="subject" name="subject" value="Re: お問い合わせありがとうございます">
+  </div>
+  <div class="field">
+    <label for="body">本文 <span class="required">*</span></label>
+    <textarea id="body" name="body" rows="8"></textarea>
+  </div>
+  <div class="button-row">
+    <a class="btn btn-primary" href="06_detail.html">送信する</a>
+    <a class="btn btn-secondary" href="06_detail.html">キャンセル</a>
+  </div>
+</form>
+</main>
+</body>
+</html>

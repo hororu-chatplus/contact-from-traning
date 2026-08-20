@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>お問い合わせ（プレビュー） - ChatPlus</title>
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<main class="form-card">
+<p class="note" style="margin-top:0;">[プレビュー] S-01 入力画面 ／ <a href="index.html">一覧に戻る</a></p>
+<h1>お問い合わせ</h1>
+<form onsubmit="return false;">
+<div class="field">
+  <label for="company_name">会社名 <span class="required">*</span></label>
+  <input type="text" id="company_name" name="company_name">
+</div>
+
+<div class="field">
+  <label for="phone">電話番号</label>
+  <input type="tel" id="phone" name="phone">
+</div>
+
+<div class="field">
+  <label for="name">お名前 <span class="required">*</span></label>
+  <input type="text" id="name" name="name">
+</div>
+
+<div class="field">
+  <label for="email">メールアドレス <span class="required">*</span></label>
+  <input type="email" id="email" name="email">
+</div>
+
+<div class="field">
+  <label for="service_type">サービス項目</label>
+  <select id="service_type" name="service_type">
+    <option value="">選択してください</option>
+    <option>ChatPlus</option>
+    <option>FAQPlus</option>
+    <option>AI AgentPlus</option>
+    <option>その他</option>
+  </select>
+</div>
+
+<div class="field">
+  <label for="inquiry_type">お問い合わせ種別 <span class="required">*</span></label>
+  <select id="inquiry_type" name="inquiry_type">
+    <option value="">選択してください</option>
+    <option>サービス内容について</option>
+    <option>見積もりについて</option>
+    <option>その他</option>
+  </select>
+</div>
+
+<div class="field">
+  <label for="content">お問い合わせ内容 <span class="required">*</span></label>
+  <textarea id="content" name="content" rows="6"></textarea>
+</div>
+
+<div class="field recaptcha-note">
+  <p>reCAPTCHA（研修用のため表示のみ）</p>
+</div>
+
+<a class="btn btn-primary" href="02_confirm.html">確認する</a>
+</form>
+</main>
+</body>
+</html>

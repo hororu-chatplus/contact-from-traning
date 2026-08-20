@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>管理者アカウント管理（プレビュー） - ChatPlus</title>
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<header class="admin-header">
+  <h1>管理者アカウント管理</h1>
+  <nav><a href="index.html">プレビュー一覧</a><a href="05_list.html">一覧へ戻る</a></nav>
+</header>
+<main class="admin-main">
+<p class="note">[プレビュー：サンプルデータ表示中] S-08 管理者アカウント管理画面</p>
+
+<table class="list-table">
+<thead><tr><th>ログインID</th><th>状態</th><th>作成日時</th><th>操作</th></tr></thead>
+<tbody>
+<tr>
+  <td>admin</td><td>有効</td><td>2026-01-10 09:00</td>
+  <td><button type="button" class="btn btn-secondary" onclick="alert('プレビューのため実際の切替は行われません')">無効化する</button></td>
+</tr>
+<tr>
+  <td>admin02</td><td>無効</td><td>2026-02-01 09:00</td>
+  <td><button type="button" class="btn btn-secondary" onclick="alert('プレビューのため実際の切替は行われません')">有効化する</button></td>
+</tr>
+</tbody>
+</table>
+
+<h2>新規登録</h2>
+<form onsubmit="return false;">
+  <div class="field">
+    <label for="login_id">ログインID <span class="required">*</span></label>
+    <input type="text" id="login_id" name="login_id">
+  </div>
+  <div class="field">
+    <label for="password">パスワード <span class="required">*</span></label>
+    <input type="password" id="password" name="password">
+  </div>
+  <div class="field">
+    <label for="password_confirm">パスワード（確認用） <span class="required">*</span></label>
+    <input type="password" id="password_confirm" name="password_confirm">
+  </div>
+  <button type="submit" class="btn btn-primary" onclick="alert('プレビューのため実際の登録は行われません')">登録する</button>
+</form>
+</main>
+</body>
+</html>
